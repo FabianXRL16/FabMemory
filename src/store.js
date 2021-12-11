@@ -62,10 +62,10 @@ export default new Vuex.Store({
         state.gameCards = createdGameCards(state.level + 1);
       }
       if (state.difficulty === "i") {
-        state.gameCards = createdGameCards((state.level + 1) * 2 + 2);
+        state.gameCards = createdGameCards((state.level + 1) * 2);
       }
       if (state.difficulty === "d") {
-        state.gameCards = createdGameCards((state.level + 1) * 4 + 20);
+        state.gameCards = createdGameCards((state.level + 1) * 2 + 4);
       }
     },
   },
