@@ -1,16 +1,22 @@
 <template>
   <div class="home">
-    {{ title }}
+    <logo />
+    <levels />
   </div>
 </template>
 
 <script>
+import logo from "./global/logo.vue";
+import levels from "./global/levels.vue";
 export default {
   name: "home",
-  components: {},
+  components: {
+    logo,
+    levels,
+  },
   data() {
     return {
-      title: "FabMusic",
+      title: "FabMemory",
     };
   },
 };
@@ -18,6 +24,12 @@ export default {
 
 <style scoped>
 .home {
-  background: red;
+  display: flex;
+  flex-direction: column;
+}
+@media (max-width: 480px) {
+  .home {
+  gap: 60px;
+}
 }
 </style>
