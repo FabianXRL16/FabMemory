@@ -1,15 +1,18 @@
 <template>
   <div id="app">
     <home />
+    <modal-level v-if="$store.state.modalLevel" />
   </div>
 </template>
 
 <script>
 import home from "./components/home.vue";
+import modalLevel from "./components/global/modalLevel.vue";
 export default {
   name: "App",
   components: {
     home,
+    modalLevel,
   },
 };
 </script>
@@ -37,5 +40,6 @@ body {
   height: 100%;
   display: grid;
   place-content: center;
+  position: relative;
 }
 </style>
