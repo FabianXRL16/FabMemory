@@ -1,25 +1,36 @@
 <template>
   <div class="levels">
     <div class="containerLevel">
-      <button class="btnLevel btn" v-for="(level, i) of levels" :key="i">
-        {{ level.title }}
-      </button>
+      <btn
+        v-for="(level, i) of levels"
+        :key="i"
+        :content="level"
+        :styleBtn="style"
+        @actionBtn="actionBtn"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import btn from "../custom/btn.vue";
 export default {
   name: "levels",
-  components: {},
+  components: { btn },
   data() {
     return {
       levels: [
-        { title: "Fácil" },
-        { title: "Intermedio" },
-        { title: "Difícil" },
+        { title: "Fácil", action: "e" },
+        { title: "Intermedio", action: "i" },
+        { title: "Difícil", action: "d" },
       ],
+      style: `min-width: 200px; height: 100px;`,
     };
+  },
+  methods: {
+    actionBtn(e) {
+      console.log(e);
+    },
   },
 };
 </script>
@@ -41,27 +52,6 @@ export default {
   justify-content: center;
   align-items: center;
   gap: 20px;
-}
-.btn {
-  outline: none;
-  cursor: pointer;
-  border: none;
-  background: transparent;
-}
-.btnLevel {
-  min-width: 200px;
-  height: 100px;
-  box-shadow: rgba(204, 219, 232) 8px 8px 20px,
-    rgba(255, 255, 255, 0.8) -8px -8px 20px;
-  border-radius: 10px;
-  color: var(--bg-secondary);
-  font-size: 25px;
-  transition: ease-in;
-}
-.btnLevel:hover {
-  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
-    rgba(255, 255, 255, 0.8) -3px -3px 6px 1px inset;
-  transition: ease-in;
 }
 @media (max-width: 480px) {
   .levels {
