@@ -39,12 +39,16 @@ span {
 @media (max-width: 750px) {
   .logo {
     width: 90vw;
+    flex-direction: column;
+    gap: 20px;
   }
   img {
-    height: 45px;
+    height: 75px;
   }
   h1 {
-    font-size: 35px;
+    margin: 0;
+    font-size: 50px;
+    line-height: 50px;
   }
 }
 </style>

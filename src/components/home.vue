@@ -29,7 +29,7 @@ export default {
 }
 @media (max-width: 750px) {
   .home {
-    gap: 60px;
+    gap: 30px;
   }
 }
 </style>
