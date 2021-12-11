@@ -42,6 +42,8 @@ export default {
   color: var(--bg-secondary);
   font-size: 25px;
   transition: ease-in;
+  min-width: 50px;
+  min-height: 50px;
 }
 .btn:hover {
   box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
