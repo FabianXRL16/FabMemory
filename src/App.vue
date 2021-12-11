@@ -16,7 +16,8 @@ export default {
 
 <style>
 :root {
-  --bg-primary: #80ffd1;
+  --bg-primary: #e9edf0;
+  --bg-secondary: #acbcd1;
   --white: #fcfafa;
   --black: #303030;
 }
