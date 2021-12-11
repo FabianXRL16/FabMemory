@@ -1,18 +1,21 @@
 <template>
   <div id="app">
-    <home />
+    <home v-if="!$store.state.play" />
     <modal-level v-if="$store.state.modalLevel" />
+    <play v-if="$store.state.play" />
   </div>
 </template>
 
 <script>
 import home from "./components/home.vue";
 import modalLevel from "./components/global/modalLevel.vue";
+import play from "./components/play.vue";
 export default {
   name: "App",
   components: {
     home,
     modalLevel,
+    play,
   },
 };
 </script>
