@@ -29,6 +29,7 @@ export default {
   },
   methods: {
     actionBtn(e) {
+      this.$store.dispatch("showModalLevel");
       console.log(e);
     },
   },
