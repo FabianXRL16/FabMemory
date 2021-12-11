@@ -21,6 +21,7 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap');
 :root {
   --bg-primary: #e9edf0;
   --bg-secondary: #acbcd1;
@@ -29,6 +30,7 @@ export default {
   --black: #303030;
 }
 body {
+  font-family: 'Nunito', sans-serif;
   margin: 0;
   box-sizing: border-box;
   width: 100%;
