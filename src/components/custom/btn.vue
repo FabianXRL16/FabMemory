@@ -1,6 +1,7 @@
 <template>
   <button class="btn" :style="styleBtn" @click="action">
     {{ content.title }}
+    <slot></slot>
   </button>
 </template>
 
