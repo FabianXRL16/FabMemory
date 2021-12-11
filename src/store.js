@@ -7,10 +7,12 @@ export default new Vuex.Store({
   state: {
     modalLevel: false,
     level: "f",
+    play: false,
   },
   getters: {
     getModalLevel: (state) => state.modalLevel,
     getLevel: (state) => state.level,
+    getPlay: (state) => state.play,
   },
   actions: {
     showModalLevel({ commit }) {
@@ -19,6 +21,9 @@ export default new Vuex.Store({
     showLevel({ commit }, level) {
       commit("SHOW_LEVEL", level);
     },
+    showPlay({ commit }) {
+      commit("CHANGE_STATE_PLAY");
+    },
   },
   mutations: {
     CHANGE_STATE_MODAL(state) {
@@ -26,6 +31,9 @@ export default new Vuex.Store({
     },
     SHOW_LEVEL(state, level) {
       state.level = level;
+    },
+    CHANGE_STATE_PLAY(state) {
+      state.play = !state.play;
     },
   },
 });
