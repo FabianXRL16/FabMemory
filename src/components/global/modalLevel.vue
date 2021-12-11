@@ -2,7 +2,7 @@
   <div
     class="modalLevel"
     :class="
-      $store.state.modalLevel ? 'animationOpenModel' : 'animationOffModel'
+      $store.state.modalDifficulty ? 'animationOpenModel' : 'animationOffModel'
     "
   >
     <div class="title">
@@ -59,10 +59,10 @@ export default {
   },
   methods: {
     closed() {
-      this.$store.dispatch("showModalLevel");
+      this.$store.dispatch("showModalDifficulty");
     },
     selectLevel() {
-      this.$store.dispatch("showModalLevel");
+      this.$store.dispatch("showModalDifficulty");
       this.$store.dispatch("showPlay");
     },
   },

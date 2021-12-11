@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <home v-if="!$store.state.play" />
-    <modal-level v-if="$store.state.modalLevel" />
+    <modal-level v-if="$store.state.modalDifficulty" />
     <play v-if="$store.state.play" />
   </div>
 </template>

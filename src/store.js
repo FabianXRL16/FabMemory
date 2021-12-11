@@ -5,21 +5,22 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    modalLevel: false,
-    level: "f",
+    modalDifficulty: false,
+    difficulty: "f",
     play: false,
+    facil:[]
   },
   getters: {
-    getModalLevel: (state) => state.modalLevel,
-    getLevel: (state) => state.level,
+    getModalDifficulty: (state) => state.modalDifficulty,
+    getDifficulty: (state) => state.difficulty,
     getPlay: (state) => state.play,
   },
   actions: {
-    showModalLevel({ commit }) {
+    showModalDifficulty({ commit }) {
       commit("CHANGE_STATE_MODAL");
     },
-    showLevel({ commit }, level) {
-      commit("SHOW_LEVEL", level);
+    showDifficulty({ commit }, difficulty) {
+      commit("SHOW_DIFFICULTY", difficulty);
     },
     showPlay({ commit }) {
       commit("CHANGE_STATE_PLAY");
@@ -27,10 +28,10 @@ export default new Vuex.Store({
   },
   mutations: {
     CHANGE_STATE_MODAL(state) {
-      state.modalLevel = !state.modalLevel;
+      state.modalDifficulty = !state.modalDifficulty;
     },
-    SHOW_LEVEL(state, level) {
-      state.level = level;
+    SHOW_DIFFICULTY(state, difficulty) {
+      state.difficulty = difficulty;
     },
     CHANGE_STATE_PLAY(state) {
       state.play = !state.play;

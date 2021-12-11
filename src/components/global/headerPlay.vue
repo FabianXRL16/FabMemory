@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     actionBtn() {
-      this.$store.dispatch("showModalLevel");
+      this.$store.dispatch("showModalDifficulty");
       this.$store.dispatch("showPlay");
     },
   },

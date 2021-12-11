@@ -1,15 +1,16 @@
 <template>
   <div class="play">
     <header-play />
-    <div class="containerPlay">a</div>
+    <container-play />
   </div>
 </template>
 
 <script>
 import headerPlay from "./global/headerPlay.vue";
+import containerPlay from "./global/containerPlay.vue";
 export default {
   name: "play",
-  components: { headerPlay },
+  components: { headerPlay, containerPlay },
   data() {
     return {
       title: "FabMemory",

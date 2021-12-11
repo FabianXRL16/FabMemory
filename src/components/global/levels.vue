@@ -29,8 +29,8 @@ export default {
   },
   methods: {
     actionBtn(e) {
-      this.$store.dispatch("showModalLevel");
-      this.$store.dispatch("showLevel", e);
+      this.$store.dispatch("showModalDifficulty");
+      this.$store.dispatch("showDifficulty", e);
     },
   },
 };
