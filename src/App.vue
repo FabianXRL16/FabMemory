@@ -1,21 +1,31 @@
 <template>
-  <div id="app">hola</div>
+  <div id="app">
+    <home />
+  </div>
 </template>
 
 <script>
+import home from "./components/home.vue";
 export default {
   name: "App",
-  components: {},
+  components: {
+    home,
+  },
 };
 </script>
 
 <style>
+:root {
+  --bg-primary: #80ffd1;
+  --white: #fcfafa;
+  --black: #303030;
+}
 body {
   margin: 0;
   box-sizing: border-box;
   width: 100%;
   height: 100vh;
-  background: red;
+  background: var(--bg-primary);
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -24,5 +34,7 @@ body {
   text-align: center;
   width: 100%;
   height: 100%;
+  display: grid;
+  place-content: center;
 }
 </style>
