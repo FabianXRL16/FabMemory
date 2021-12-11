@@ -6,8 +6,8 @@
       </template>
     </btn>
     <div class="titleLevel">
-      <span class="level">Facil</span>
-      <h2>Nivel 2</h2>
+      <span class="level">{{ difficulty }}</span>
+      <h2>Nivel {{ $store.state.level }}</h2>
     </div>
     <div class="time">
       <label>30s</label>
@@ -24,6 +24,16 @@ export default {
     return {
       title: "FabMemory",
     };
+  },
+  computed: {
+    difficulty() {
+      let difficulty = this.$store.state.difficulty;
+      let text = "";
+      if (difficulty === "f") text = "Fácil";
+      if (difficulty === "i") text = "Intermedio";
+      if (difficulty === "d") text = "Difícil";
+      return text;
+    },
   },
   methods: {
     actionBtn() {
