@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       levels: [
-        { title: "Fácil", action: "e" },
+        { title: "Fácil", action: "f" },
         { title: "Intermedio", action: "i" },
         { title: "Difícil", action: "d" },
       ],
@@ -30,7 +30,7 @@ export default {
   methods: {
     actionBtn(e) {
       this.$store.dispatch("showModalLevel");
-      console.log(e);
+      this.$store.dispatch("showLevel", e);
     },
   },
 };
