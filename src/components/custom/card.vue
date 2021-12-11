@@ -1,5 +1,7 @@
 <template>
-  <button class="card" :class="styleCard" @click="action">aaa</button>
+  <button class="card" :class="styleCard" @click="action">
+    <img class="stamp" src="../../assets/logo.svg" alt="" />
+  </button>
 </template>
 
 <script>
@@ -41,10 +43,23 @@ export default {
   transition: ease-in;
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .card:hover {
   box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
     rgba(255, 255, 255, 0.8) -3px -3px 6px 1px inset;
+  transition: ease-in;
+}
+.stamp {
+  width: 80%;
+  opacity: 0.6;
+  transform: scale(1);
+  transition: ease-in;
+}
+.card:hover .stamp {
+  opacity: 1;
   transition: ease-in;
 }
 </style>
