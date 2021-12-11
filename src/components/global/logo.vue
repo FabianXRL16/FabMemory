@@ -1,10 +1,7 @@
 <template>
   <div class="logo">
-    <img
-      src="https://site.innovasport.com/ux/iv-slide-marcas/-logo-adidas.png"
-      alt="logo de FabMemory"
-    />
-    <h1>{{ title }}</h1>
+    <img src="../../assets/logo.svg" alt="logo de FabMemory" />
+    <h1>Fab<span>Memory</span></h1>
   </div>
 </template>
 
@@ -13,9 +10,7 @@ export default {
   name: "logo",
   components: {},
   data() {
-    return {
-      title: "FabMemory",
-    };
+    return {};
   },
 };
 </script>
@@ -26,21 +21,30 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--white);
+  color: var(--bg-secondary);
+  gap: 10px;
 }
 img {
   width: auto;
-  height: 100px;
+  height: 80px;
 }
 h1 {
-  font-size: 50px;
+  font-size: 60px;
+  font-weight: 700;
+}
+span {
+  font-weight: 300;
+  color: var(---bg-secondary-disabled);
 }
 @media (max-width: 750px) {
   .logo {
     width: 90vw;
   }
+  img {
+    height: 45px;
+  }
   h1 {
-    font-size: 20px;
+    font-size: 35px;
   }
 }
 </style>
