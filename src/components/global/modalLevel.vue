@@ -62,7 +62,8 @@ export default {
       this.$store.dispatch("showModalLevel");
     },
     selectLevel() {
-      console.log("hola");
+      this.$store.dispatch("showModalLevel");
+      this.$store.dispatch("showPlay");
     },
   },
 };
@@ -135,6 +136,7 @@ h1 {
     rgba(255, 255, 255, 0.8) -3px -3px 6px 1px inset;
   transition: ease-in;
   color: var(--bg-secondary-disabled);
+  opacity: 0.6;
 }
 @media (max-width: 750px) {
   .modalLevel {
