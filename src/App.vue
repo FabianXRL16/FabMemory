@@ -21,6 +21,7 @@ export default {
 :root {
   --bg-primary: #e9edf0;
   --bg-secondary: #acbcd1;
+  --bg-secondary-disabled: #c5d1e1;
   --white: #fcfafa;
   --black: #303030;
 }
