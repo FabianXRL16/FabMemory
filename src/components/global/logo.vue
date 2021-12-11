@@ -35,7 +35,7 @@ img {
 h1 {
   font-size: 50px;
 }
-@media (max-width: 480px) {
+@media (max-width: 750px) {
   .logo {
     width: 90vw;
   }

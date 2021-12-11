@@ -27,7 +27,7 @@ export default {
   display: flex;
   flex-direction: column;
 }
-@media (max-width: 480px) {
+@media (max-width: 750px) {
   .home {
     gap: 60px;
   }

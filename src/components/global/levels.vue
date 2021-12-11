@@ -54,7 +54,7 @@ export default {
   align-items: center;
   gap: 20px;
 }
-@media (max-width: 480px) {
+@media (max-width: 750px) {
   .levels {
     width: 90vw;
   }
