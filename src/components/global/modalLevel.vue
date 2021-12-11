@@ -93,7 +93,7 @@ export default {
   color: var(--bg-secondary);
 }
 .animationOpenModel {
-  animation: showModal ease-in 0.3s;
+  animation: showModal ease-in 0s;
 }
 @keyframes showModal {
   to {
@@ -104,7 +104,7 @@ export default {
   }
 }
 .animationOffModel {
-  animation: hideModal 0.3s ease-in 2s;
+  animation: hideModal 0s ease-in 2s;
 }
 @keyframes hideModal {
   0% {
