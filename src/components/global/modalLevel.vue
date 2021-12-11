@@ -13,7 +13,7 @@
         v-for="(level, i) of levels"
         :class="level.state ? '' : 'disabled'"
         :disabled="!level.state"
-        @actionBtn="selectLevel"
+        @actionBtn="selectLevel(i + 1)"
         :key="i"
         :content="level"
         :styleBtn="styleLevels"
@@ -50,7 +50,7 @@ export default {
   computed: {
     currentLevel() {
       let title = "";
-      let level = this.$store.state.level;
+      let level = this.$store.state.difficulty;
       if (level === "f") title = "Fácil";
       if (level === "i") title = "Intermedio";
       if (level === "d") title = "Difícil";
@@ -61,9 +61,12 @@ export default {
     closed() {
       this.$store.dispatch("showModalDifficulty");
     },
-    selectLevel() {
+    selectLevel(i) {
       this.$store.dispatch("showModalDifficulty");
       this.$store.dispatch("showPlay");
+      this.$store.dispatch("showLevel", i);
+      this.$store.dispatch("showGameCards");
+      console.log(this.$store.state.gameCards);
     },
   },
 };
