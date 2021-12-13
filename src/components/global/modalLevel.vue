@@ -66,7 +66,6 @@ export default {
       this.$store.dispatch("showPlay");
       this.$store.dispatch("showLevel", i);
       this.$store.dispatch("showGameCards");
-      console.log(this.$store.state.gameCards);
     },
   },
 };
