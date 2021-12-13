@@ -1,6 +1,12 @@
 <template>
-  <button class="card" :class="styleCard" @click="action">
-    <img class="stamp" src="../../assets/logo.svg" alt="" />
+  <button class="card" :class="styleCard" @click="action" :disabled="item.state">
+    <img
+      v-if="item.state"
+      class="stamp"
+      :src="require(`../../assets/imgGameCards/img${item.id}.png`)"
+      alt=""
+    />
+    <img v-else class="stamp" src="../../assets/logo.svg" alt="" />
   </button>
 </template>
 
@@ -9,7 +15,7 @@ export default {
   name: "card",
   components: {},
   props: {
-    content: {
+    item: {
       type: Object,
       default: () => {},
     },
@@ -17,13 +23,17 @@ export default {
       type: String,
       default: "",
     },
+    i: {
+      type: Number,
+      default: 0,
+    },
   },
   data() {
     return {};
   },
   methods: {
     action() {
-      this.$emit("actionBtn", this.content.action);
+        this.$emit("showCard",this.i)
     },
   },
 };
