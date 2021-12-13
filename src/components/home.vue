@@ -26,10 +26,11 @@ export default {
 .home {
   display: flex;
   flex-direction: column;
+  gap: 30px;
 }
 @media (max-width: 750px) {
   .home {
-    gap: 30px;
+    gap: 40px;
   }
 }
 </style>
