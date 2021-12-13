@@ -145,6 +145,7 @@ h1 {
     width: 90vw;
     height: 90vh;
     padding: 20px;
+    box-shadow: none;
   }
   .containerLevels {
     grid-template-rows: repeat(5, 1fr);
