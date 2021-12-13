@@ -1,6 +1,12 @@
 <template>
   <div class="containerPlay" :style="style">
-    <card v-for="(item, i) of $store.state.gameCards" :key="i"></card>
+    <card
+      v-for="(item, i) of $store.state.gameCards"
+      :item="item"
+      :i="i"
+      :key="i"
+      @showCard="game"
+    ></card>
   </div>
 </template>
 
@@ -12,6 +18,9 @@ export default {
   data() {
     return {
       title: "FabMemory",
+      count: 0,
+      pos: [],
+      totalMatch: 0,
     };
   },
   computed: {
@@ -146,6 +155,42 @@ export default {
         }
       }
       return [cols, px];
+    },
+  },
+  methods: {
+    game(newPos) {
+      this.$store.dispatch("showCard", newPos);
+      this.pos.push(newPos);
+      this.count += 1;
+      if (this.count === 2) {
+        if (this.match()) {
+          this.totalMatch += 1;
+          this.endGame();
+        } else {
+          this.hiddenCard(this, this.pos);
+        }
+        this.newGame();
+      }
+    },
+    newGame() {
+      this.count = 0;
+      this.pos = [];
+    },
+    match() {
+      let cards = this.$store.state.gameCards;
+      let pos = this.pos;
+      return cards[pos[0]].id === cards[pos[1]].id;
+    },
+    hiddenCard(that, arr) {
+      setTimeout(function () {
+        arr.map((i) => that.$store.dispatch("showCard", i));
+      }, 1000);
+    },
+    endGame() {
+      let maxGame = this.$store.state.gameCards.length / 2;
+      if (this.totalMatch === maxGame) {
+        console.log("end game");
+      }
     },
   },
 };
