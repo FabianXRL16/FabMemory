@@ -6,6 +6,7 @@
       :i="i"
       :key="i"
       @showCard="game"
+      :disabled="disabled"
     ></card>
   </div>
 </template>
@@ -21,6 +22,7 @@ export default {
       count: 0,
       pos: [],
       totalMatch: 0,
+      disabled: false,
     };
   },
   computed: {
@@ -182,11 +184,14 @@ export default {
       return cards[pos[0]].id === cards[pos[1]].id;
     },
     hiddenCard(that, arr) {
+      this.disabled = true;
       setTimeout(function () {
         arr.map((i) => that.$store.dispatch("showCard", i));
+        that.disabled = false;
       }, 1000);
     },
     endGame() {
+      this.disabled = false;
       let maxGame = this.$store.state.gameCards.length / 2;
       if (this.totalMatch === maxGame) {
         console.log("end game");
