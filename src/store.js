@@ -34,6 +34,9 @@ export default new Vuex.Store({
     showGameCards({ commit }) {
       commit("CREATED_GAME_CARDS");
     },
+    showCard({ commit }, pos) {
+      commit("SHOW_CARD", pos);
+    },
   },
   mutations: {
     CHANGE_STATE_MODAL(state) {
@@ -53,9 +56,18 @@ export default new Vuex.Store({
         let cards = [];
         let arr = [];
         for (let i = 1; i < count + 1; i++) {
-          arr.push(i);
+          arr.push({
+            id: i,
+            state: false,
+          });
         }
-        cards = [...arr, ...arr];
+        for (let i = 1; i < count + 1; i++) {
+          arr.push({
+            id: i,
+            state: false,
+          });
+        }
+        cards = [...arr];
         return cards.sort(() => Math.random() - 0.5);
       }
       if (state.difficulty === "f") {
@@ -67,6 +79,9 @@ export default new Vuex.Store({
       if (state.difficulty === "d") {
         state.gameCards = createdGameCards((state.level + 1) * 2 + 4);
       }
+    },
+    SHOW_CARD(state, pos) {
+      state.gameCards[pos].state = !state.gameCards[pos].state;
     },
   },
 });
