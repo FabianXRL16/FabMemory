@@ -15,36 +15,128 @@ export default new Vuex.Store({
         difficulty: "f",
         title: "Fácil",
         content: [
-          { title: "Nivel 1", action: "1", state: true },
-          { title: "Nivel 2", action: "2", state: false },
-          { title: "Nivel 3", action: "3", state: false },
-          { title: "Nivel 4", action: "4", state: false },
-          { title: "Nivel 5", action: "5", state: false },
+          { title: "Nivel 1", action: "1", maxGame: 4, state: true },
+          { title: "Nivel 2", action: "2", maxGame: 6, state: false },
+          { title: "Nivel 3", action: "3", maxGame: 8, state: false },
+          { title: "Nivel 4", action: "4", maxGame: 10, state: false },
+          { title: "Nivel 5", action: "5", maxGame: 12, state: false },
         ],
       },
       {
         difficulty: "i",
         title: "Intermedio",
         content: [
-          { title: "Nivel 1", action: "1", state: true },
-          { title: "Nivel 2", action: "2", state: false },
-          { title: "Nivel 3", action: "3", state: false },
-          { title: "Nivel 4", action: "4", state: false },
-          { title: "Nivel 5", action: "5", state: false },
+          {
+            title: "Nivel 1",
+            action: "1",
+            maxGame: 8,
+            time: true,
+            waitTime: 8,
+            duration: 20,
+            addTime: 5,
+            state: true,
+          },
+          {
+            title: "Nivel 2",
+            action: "2",
+            maxGame: 12,
+            time: true,
+            waitTime: 8,
+            duration: 20,
+            addTime: 5,
+            state: false,
+          },
+          {
+            title: "Nivel 3",
+            action: "3",
+            maxGame: 16,
+            time: true,
+            waitTime: 8,
+            duration: 20,
+            addTime: 5,
+            state: false,
+          },
+          {
+            title: "Nivel 4",
+            action: "4",
+            maxGame: 20,
+            time: true,
+            waitTime: 8,
+            duration: 20,
+            addTime: 5,
+            state: false,
+          },
+          {
+            title: "Nivel 5",
+            action: "5",
+            maxGame: 24,
+            time: true,
+            waitTime: 8,
+            duration: 20,
+            addTime: 5,
+            state: false,
+          },
         ],
       },
       {
         difficulty: "d",
         title: "Difícil",
         content: [
-          { title: "Nivel 1", action: "1", state: true },
-          { title: "Nivel 2", action: "2", state: false },
-          { title: "Nivel 3", action: "3", state: false },
-          { title: "Nivel 4", action: "4", state: false },
-          { title: "Nivel 5", action: "5", state: false },
+          {
+            title: "Nivel 1",
+            action: "1",
+            maxGame: 16,
+            time: true,
+            waitTime: 8,
+            duration: 10,
+            addTime: 3,
+            state: true,
+          },
+          {
+            title: "Nivel 2",
+            action: "2",
+            maxGame: 20,
+            time: true,
+            waitTime: 8,
+            duration: 10,
+            addTime: 3,
+            state: false,
+          },
+          {
+            title: "Nivel 3",
+            action: "3",
+            maxGame: 24,
+            time: true,
+            waitTime: 8,
+            duration: 10,
+            addTime: 3,
+            state: false,
+          },
+          {
+            title: "Nivel 4",
+            action: "4",
+            maxGame: 28,
+            time: true,
+            waitTime: 8,
+            duration: 10,
+            addTime: 3,
+            state: false,
+          },
+          {
+            title: "Nivel 5",
+            action: "5",
+            maxGame: 32,
+            time: true,
+            waitTime: 8,
+            duration: 10,
+            addTime: 3,
+            state: false,
+          },
         ],
       },
     ],
+    disabled: false,
+    // maxLevel: 0,
   },
   getters: {
     getModalDifficulty: (state) => state.modalDifficulty,
@@ -53,6 +145,8 @@ export default new Vuex.Store({
     getLevel: (state) => state.level,
     getGameCards: (state) => state.gameCards,
     getLevels: (state) => state.levels,
+    // getMaxLevel: (state) => state.maxLevel,
+    getDisabled: (state) => state.disabled,
   },
   actions: {
     showModalDifficulty({ commit }) {
@@ -73,8 +167,17 @@ export default new Vuex.Store({
     showCard({ commit }, pos) {
       commit("SHOW_CARD", pos);
     },
-    nextLevel({ commit }) {
-      commit("NEXT_LEVEL");
+    nextLevel({ commit }, difficulty) {
+      commit("NEXT_LEVEL", difficulty);
+    },
+    // maxLevel({ commit }) {
+    //   commit("MAX_LEVEL");
+    // },
+    changeDisabled({ commit }) {
+      commit("CHANGE_DISABLED");
+    },
+    disabledCardInMatch({ commit }, pos) {
+      commit("CHANGE_STATE_IN_CARD_WITCH_MATCH", pos);
     },
   },
   mutations: {
@@ -122,16 +225,31 @@ export default new Vuex.Store({
     SHOW_CARD(state, pos) {
       state.gameCards[pos].state = !state.gameCards[pos].state;
     },
-    NEXT_LEVEL(state) {
+    NEXT_LEVEL(state, difficulty) {
       if (
         state.levels
-          .find((i) => i.difficulty === "f")
+          .find((i) => i.difficulty === difficulty)
           .content.some((i) => i.state === false)
       ) {
         state.levels
           .find((i) => i.difficulty === state.difficulty)
           .content.find((i) => i.state === false).state = true;
       }
+    },
+    // MAX_LEVEL(state) {
+    //   let pos = state.levels
+    //     .find((i) => i.difficulty === state.difficulty)
+    //     .content.findIndex((i) => i.state === false);
+    //   state.maxLevel = state.levels.find(
+    //     (i) => i.difficulty === state.difficulty
+    //   ).content[pos - 1].maxGame;
+    // },
+    CHANGE_DISABLED(state) {
+      state.disabled = !state.disabled;
+    },
+    CHANGE_STATE_IN_CARD_WITCH_MATCH(state, pos) {
+      state.gameCards[pos[0]].state = true;
+      state.gameCards[pos[1]].state = true;
     },
   },
 });
