@@ -6,7 +6,7 @@
       :i="i"
       :key="i"
       @showCard="game"
-      :disabled="disabled"
+      :disabled="$store.state.disabled"
     ></card>
   </div>
 </template>
@@ -22,7 +22,6 @@ export default {
       count: 0,
       pos: [],
       totalMatch: 0,
-      disabled: false,
     };
   },
   computed: {
@@ -161,18 +160,41 @@ export default {
   },
   methods: {
     game(newPos) {
-      this.$store.dispatch("showCard", newPos);
-      this.pos.push(newPos);
-      this.count += 1;
+      this.firstPlay(newPos);
       if (this.count === 2) {
+        this.$store.dispatch("changeDisabled");
         if (this.match()) {
-          this.totalMatch += 1;
-          this.endGame();
+          this.actionMatch();
+          if (this.totalMatch === this.$store.state.gameCards.length / 2) {
+            this.endGame();
+          } else {
+            this.nextTry();
+          }
         } else {
-          this.hiddenCard(this, this.pos);
+          this.noMatch();
         }
         this.newGame();
       }
+    },
+    // game(newPos) {
+    //   this.$store.dispatch("showCard", newPos);
+    //   this.pos.push(newPos);
+    //   this.count += 1;
+    //   console.log(this.$store.state.maxLevel);
+    //   if (this.count === 2) {
+    //     if (this.match()) {
+    //       this.totalMatch += 1;
+    //       console.log("go")
+    //       this.endGame();
+    //     } else {
+    //       this.hiddenCard(this, this.pos);
+    //     }
+    //   }
+    // },
+    firstPlay(newPos) {
+      this.$store.dispatch("showCard", newPos);
+      this.pos.push(newPos);
+      this.count += 1;
     },
     newGame() {
       this.count = 0;
@@ -183,19 +205,55 @@ export default {
       let pos = this.pos;
       return cards[pos[0]].id === cards[pos[1]].id;
     },
-    hiddenCard(that, arr) {
-      this.disabled = true;
+    noMatch() {
+      let posAux = this.pos;
+      let that = this;
       setTimeout(function () {
-        arr.map((i) => that.$store.dispatch("showCard", i));
-        that.disabled = false;
-      }, 1000);
+        that.$store.dispatch("showCard", posAux[0]);
+        that.$store.dispatch("showCard", posAux[1]);
+        that.$store.dispatch("changeDisabled");
+      }, 500);
+    },
+    actionMatch() {
+      this.totalMatch += 1;
+      this.$store.dispatch("disabledCardInMatch", this.pos);
+    },
+    nextTry() {
+      let that = this;
+      setTimeout(function () {
+        that.$store.dispatch("changeDisabled");
+      }, 500);
     },
     endGame() {
-      this.disabled = false;
-      let maxGame = this.$store.state.gameCards.length / 2;
-      if (this.totalMatch === maxGame) {
-        console.log("end game");
-      }
+      // this.disabled = true;
+      // let maxGame = this.$store.state.gameCards.length / 2;
+      // if (this.totalMatch === maxGame) {
+      //   if (this.totalMatch === this.$store.state.maxLevel / 2) {
+      //     this.$store.dispatch("nextLevel");
+      //   }
+      //   this.transitionEndGame(this);
+      // } else {
+      //   this.totalMatch = 0;
+      // }
+      this.$store.dispatch("nextLevel", this.$store.state.difficulty);
+      let that = this;
+      setTimeout(() => {
+        that.$store.dispatch("showModalDifficulty");
+        that.$store.dispatch("showPlay");
+        that.$store.dispatch("changeDisabled");
+      }, 500);
+    },
+    /// borar
+    transitionEndGame(that) {
+      setTimeout(() => {
+        that.$store.dispatch("showModalDifficulty");
+        that.$store.dispatch("showPlay");
+      }, 500);
+    },
+    maxGame() {
+      return this.$store.state.levels
+        .find((i) => i.difficulty === this.$store.difficulty)
+        .content.find((i) => i.state === false).maxGame;
     },
   },
 };
