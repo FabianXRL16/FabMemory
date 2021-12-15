@@ -10,7 +10,7 @@
       <h2>Nivel {{ $store.state.level }}</h2>
     </div>
     <div class="time">
-      <label>30s</label>
+      <label>{{ time }}</label>
     </div>
   </div>
 </template>
@@ -33,6 +33,15 @@ export default {
       if (difficulty === "i") text = "Intermedio";
       if (difficulty === "d") text = "Difícil";
       return text;
+    },
+    time() {
+      this.$store.dispatch("getTimeVars");
+      let time = this.$store.state.timeVars;
+      if (time[0]) {
+        return `${time[1]}s`;
+      } else {
+        return " ";
+      }
     },
   },
   methods: {
