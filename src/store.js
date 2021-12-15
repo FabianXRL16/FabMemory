@@ -136,7 +136,7 @@ export default new Vuex.Store({
       },
     ],
     disabled: false,
-    // maxLevel: 0,
+    numberOfPlays: 4,
   },
   getters: {
     getModalDifficulty: (state) => state.modalDifficulty,
@@ -145,7 +145,7 @@ export default new Vuex.Store({
     getLevel: (state) => state.level,
     getGameCards: (state) => state.gameCards,
     getLevels: (state) => state.levels,
-    // getMaxLevel: (state) => state.maxLevel,
+    getMaxMove: (state) => state.numberOfPlays,
     getDisabled: (state) => state.disabled,
   },
   actions: {
@@ -170,9 +170,9 @@ export default new Vuex.Store({
     nextLevel({ commit }, difficulty) {
       commit("NEXT_LEVEL", difficulty);
     },
-    // maxLevel({ commit }) {
-    //   commit("MAX_LEVEL");
-    // },
+    maxMove({ commit }) {
+      commit("MAX_MOVE");
+    },
     changeDisabled({ commit }) {
       commit("CHANGE_DISABLED");
     },
@@ -236,14 +236,17 @@ export default new Vuex.Store({
           .content.find((i) => i.state === false).state = true;
       }
     },
-    // MAX_LEVEL(state) {
-    //   let pos = state.levels
-    //     .find((i) => i.difficulty === state.difficulty)
-    //     .content.findIndex((i) => i.state === false);
-    //   state.maxLevel = state.levels.find(
-    //     (i) => i.difficulty === state.difficulty
-    //   ).content[pos - 1].maxGame;
-    // },
+    MAX_MOVE(state) {
+      let pos = state.levels
+        .find((i) => i.difficulty === state.difficulty)
+        .content.findIndex((i) => i.state === false);
+      console.log(pos);
+      if (pos >= 0) {
+        state.numberOfPlays = state.levels.find(
+          (i) => i.difficulty === state.difficulty
+        ).content[pos - 1].maxGame;
+      }
+    },
     CHANGE_DISABLED(state) {
       state.disabled = !state.disabled;
     },
