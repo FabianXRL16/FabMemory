@@ -6,16 +6,17 @@
     "
   >
     <div class="title">
-      <h1>{{ currentLevel }}</h1>
+      <h1>{{ level.title }}</h1>
     </div>
     <div class="containerLevels">
       <btn
-        v-for="(level, i) of levels"
+        v-for="(level, i) of level.content"
         :class="level.state ? '' : 'disabled'"
         :disabled="!level.state"
         @actionBtn="selectLevel(i + 1)"
         :key="i"
         :content="level"
+        :i="i"
         :styleBtn="styleLevels"
       />
     </div>
@@ -38,23 +39,21 @@ export default {
     return {
       style: `width: 150px; height: 50px;`,
       styleLevels: `width: 100%; height: 100%;`,
-      levels: [
-        { title: "Nivel 1", action: "1", state: true },
-        { title: "Nivel 2", action: "2", state: false },
-        { title: "Nivel 3", action: "3", state: false },
-        { title: "Nivel 4", action: "4", state: false },
-        { title: "Nivel 5", action: "5", state: false },
-      ],
     };
   },
   computed: {
-    currentLevel() {
-      let title = "";
-      let level = this.$store.state.difficulty;
-      if (level === "f") title = "Fácil";
-      if (level === "i") title = "Intermedio";
-      if (level === "d") title = "Difícil";
-      return title;
+    level() {
+      let arr = [];
+      if (this.$store.state.difficulty === "f") {
+        arr = this.$store.state.levels.find((i) => i.difficulty === "f");
+      }
+      if (this.$store.state.difficulty === "i") {
+        arr = this.$store.state.levels.find((i) => i.difficulty === "i");
+      }
+      if (this.$store.state.difficulty === "d") {
+        arr = this.$store.state.levels.find((i) => i.difficulty === "d");
+      }
+      return arr;
     },
   },
   methods: {
