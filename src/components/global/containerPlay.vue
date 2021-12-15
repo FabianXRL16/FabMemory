@@ -24,6 +24,14 @@ export default {
       totalMatch: 0,
     };
   },
+  created() {
+    let that = this;
+    setTimeout(() => {
+      for (let i = 0; i < that.$store.state.gameCards.length; i++) {
+        that.$store.dispatch("showCard", i);
+      }
+    }, 5000);
+  },
   computed: {
     style() {
       let dif = this.columsF;
@@ -160,7 +168,7 @@ export default {
   },
   methods: {
     game(newPos) {
-      this.$store.dispatch("maxMove")
+      this.$store.dispatch("maxMove");
       this.firstPlay(newPos);
       if (this.count === 2) {
         this.$store.dispatch("changeDisabled");
@@ -182,21 +190,6 @@ export default {
         this.newGame();
       }
     },
-    // game(newPos) {
-    //   this.$store.dispatch("showCard", newPos);
-    //   this.pos.push(newPos);
-    //   this.count += 1;
-    //   console.log(this.$store.state.maxLevel);
-    //   if (this.count === 2) {
-    //     if (this.match()) {
-    //       this.totalMatch += 1;
-    //       console.log("go")
-    //       this.endGame();
-    //     } else {
-    //       this.hiddenCard(this, this.pos);
-    //     }
-    //   }
-    // },
     firstPlay(newPos) {
       this.$store.dispatch("showCard", newPos);
       this.pos.push(newPos);
@@ -231,28 +224,11 @@ export default {
       }, 500);
     },
     endGame() {
-      // this.disabled = true;
-      // let maxGame = this.$store.state.gameCards.length / 2;
-      // if (this.totalMatch === maxGame) {
-      //   if (this.totalMatch === this.$store.state.maxLevel / 2) {
-      //     this.$store.dispatch("nextLevel");
-      //   }
-      //   this.transitionEndGame(this);
-      // } else {
-      //   this.totalMatch = 0;
-      // }
       let that = this;
       setTimeout(() => {
         that.$store.dispatch("showModalDifficulty");
         that.$store.dispatch("showPlay");
         that.$store.dispatch("changeDisabled");
-      }, 500);
-    },
-    /// borar
-    transitionEndGame(that) {
-      setTimeout(() => {
-        that.$store.dispatch("showModalDifficulty");
-        that.$store.dispatch("showPlay");
       }, 500);
     },
   },
