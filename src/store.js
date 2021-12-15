@@ -14,66 +14,75 @@ export default new Vuex.Store({
       {
         difficulty: "f",
         title: "Fácil",
+        time: false,
         content: [
-          { title: "Nivel 1", action: "1", maxGame: 4, state: true },
-          { title: "Nivel 2", action: "2", maxGame: 6, state: false },
-          { title: "Nivel 3", action: "3", maxGame: 8, state: false },
-          { title: "Nivel 4", action: "4", maxGame: 10, state: false },
-          { title: "Nivel 5", action: "5", maxGame: 12, state: false },
+          {
+            title: "Nivel 1",
+            action: "1",
+            maxGame: 4,
+            state: true,
+          },
+          {
+            title: "Nivel 2",
+            action: "2",
+            maxGame: 6,
+            state: false,
+          },
+          {
+            title: "Nivel 3",
+            action: "3",
+            maxGame: 8,
+            state: false,
+          },
+          {
+            title: "Nivel 4",
+            action: "4",
+            maxGame: 10,
+            state: false,
+          },
+          {
+            title: "Nivel 5",
+            action: "5",
+            maxGame: 12,
+            state: false,
+          },
         ],
       },
       {
         difficulty: "i",
         title: "Intermedio",
+        time: true,
+        duration: 20,
+        addTime: 5,
         content: [
           {
             title: "Nivel 1",
             action: "1",
             maxGame: 8,
-            time: true,
-            waitTime: 8,
-            duration: 20,
-            addTime: 5,
             state: true,
           },
           {
             title: "Nivel 2",
             action: "2",
             maxGame: 12,
-            time: true,
-            waitTime: 8,
-            duration: 20,
-            addTime: 5,
             state: false,
           },
           {
             title: "Nivel 3",
             action: "3",
             maxGame: 16,
-            time: true,
-            waitTime: 8,
-            duration: 20,
-            addTime: 5,
             state: false,
           },
           {
             title: "Nivel 4",
             action: "4",
             maxGame: 20,
-            time: true,
-            waitTime: 8,
-            duration: 20,
-            addTime: 5,
             state: false,
           },
           {
             title: "Nivel 5",
             action: "5",
             maxGame: 24,
-            time: true,
-            waitTime: 8,
-            duration: 20,
-            addTime: 5,
             state: false,
           },
         ],
@@ -81,60 +90,44 @@ export default new Vuex.Store({
       {
         difficulty: "d",
         title: "Difícil",
+        time: true,
+        duration: 10,
+        addTime: 3,
         content: [
           {
             title: "Nivel 1",
             action: "1",
             maxGame: 16,
-            time: true,
-            waitTime: 8,
-            duration: 10,
-            addTime: 3,
             state: true,
           },
           {
             title: "Nivel 2",
             action: "2",
             maxGame: 20,
-            time: true,
-            waitTime: 8,
-            duration: 10,
-            addTime: 3,
             state: false,
           },
           {
             title: "Nivel 3",
             action: "3",
             maxGame: 24,
-            time: true,
-            waitTime: 8,
-            duration: 10,
-            addTime: 3,
             state: false,
           },
           {
             title: "Nivel 4",
             action: "4",
             maxGame: 28,
-            time: true,
-            waitTime: 8,
-            duration: 10,
-            addTime: 3,
             state: false,
           },
           {
             title: "Nivel 5",
             action: "5",
             maxGame: 32,
-            time: true,
-            waitTime: 8,
-            duration: 10,
-            addTime: 3,
             state: false,
           },
         ],
       },
     ],
+    timeVars: [],
     disabled: false,
     numberOfPlays: 4,
   },
@@ -145,6 +138,7 @@ export default new Vuex.Store({
     getLevel: (state) => state.level,
     getGameCards: (state) => state.gameCards,
     getLevels: (state) => state.levels,
+    getTimeVars: (state) => state.timeVars,
     getMaxMove: (state) => state.numberOfPlays,
     getDisabled: (state) => state.disabled,
   },
@@ -176,6 +170,9 @@ export default new Vuex.Store({
     changeDisabled({ commit }) {
       commit("CHANGE_DISABLED");
     },
+    getTimeVars({ commit }) {
+      commit("GET_TIME_VARS");
+    },
     disabledCardInMatch({ commit }, pos) {
       commit("CHANGE_STATE_IN_CARD_WITCH_MATCH", pos);
     },
@@ -200,13 +197,13 @@ export default new Vuex.Store({
         for (let i = 1; i < count + 1; i++) {
           arr.push({
             id: i,
-            state: false,
+            state: true,
           });
         }
         for (let i = 1; i < count + 1; i++) {
           arr.push({
             id: i,
-            state: false,
+            state: true,
           });
         }
         cards = [...arr];
@@ -253,6 +250,16 @@ export default new Vuex.Store({
     CHANGE_STATE_IN_CARD_WITCH_MATCH(state, pos) {
       state.gameCards[pos[0]].state = true;
       state.gameCards[pos[1]].state = true;
+    },
+    GET_TIME_VARS(state) {
+      let level = state.levels.find((i) => i.difficulty === state.difficulty);
+      if (level.time) {
+        state.timeVars.push(
+          level.time,
+          level.duration,
+          level.addTime
+        );
+      }
     },
   },
 });
