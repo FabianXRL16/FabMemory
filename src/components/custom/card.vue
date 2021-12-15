@@ -1,5 +1,5 @@
 <template>
-  <button class="card" :class="styleCard" @click="action" :disabled="item.state">
+  <button class="card" :class="styleCard" @click="action">
     <img
       v-if="item.state"
       class="stamp"
@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     action() {
-        this.$emit("showCard",this.i)
+      this.item.state ? "" : this.$emit("showCard", this.i);
     },
   },
 };
