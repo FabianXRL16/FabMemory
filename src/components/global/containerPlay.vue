@@ -160,12 +160,18 @@ export default {
   },
   methods: {
     game(newPos) {
+      this.$store.dispatch("maxMove")
       this.firstPlay(newPos);
       if (this.count === 2) {
         this.$store.dispatch("changeDisabled");
         if (this.match()) {
           this.actionMatch();
           if (this.totalMatch === this.$store.state.gameCards.length / 2) {
+            console.log(this.$store.state.numberOfPlays);
+            console.log(this.totalMatch);
+            if (this.totalMatch === this.$store.state.numberOfPlays / 2) {
+              this.$store.dispatch("nextLevel", this.$store.state.difficulty);
+            }
             this.endGame();
           } else {
             this.nextTry();
@@ -235,7 +241,6 @@ export default {
       // } else {
       //   this.totalMatch = 0;
       // }
-      this.$store.dispatch("nextLevel", this.$store.state.difficulty);
       let that = this;
       setTimeout(() => {
         that.$store.dispatch("showModalDifficulty");
@@ -249,11 +254,6 @@ export default {
         that.$store.dispatch("showModalDifficulty");
         that.$store.dispatch("showPlay");
       }, 500);
-    },
-    maxGame() {
-      return this.$store.state.levels
-        .find((i) => i.difficulty === this.$store.difficulty)
-        .content.find((i) => i.state === false).maxGame;
     },
   },
 };
