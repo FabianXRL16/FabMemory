@@ -1,5 +1,6 @@
 <template>
   <div class="play">
+    <timeoutBar />
     <header-play @clear="clearTime" />
     <container-play />
   </div>
@@ -8,9 +9,10 @@
 <script>
 import headerPlay from "./global/headerPlay.vue";
 import containerPlay from "./global/containerPlay.vue";
+import timeoutBar from "./global/timeoutBar.vue";
 export default {
   name: "play",
-  components: { headerPlay, containerPlay },
+  components: { headerPlay, containerPlay, timeoutBar },
   data() {
     return {
       title: "FabMemory",
