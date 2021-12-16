@@ -1,6 +1,6 @@
 <template>
   <div class="play">
-    <header-play />
+    <header-play @clear="clearTime" />
     <container-play />
   </div>
 </template>
@@ -14,7 +14,21 @@ export default {
   data() {
     return {
       title: "FabMemory",
+      time: "",
     };
+  },
+  created() {
+    let that = this;
+    this.time = setTimeout(() => {
+      that.$store.state.gameCards.map((_, i) =>
+        that.$store.dispatch("showCard", i)
+      );
+    }, 5000);
+  },
+  methods: {
+    clearTime() {
+      clearInterval(this.time);
+    },
   },
 };
 </script>
