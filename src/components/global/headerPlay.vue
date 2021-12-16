@@ -1,6 +1,6 @@
 <template>
   <div class="headerPlay">
-    <btn :content="{}" @actionBtn="actionBtn" :disabled="$store.state.disabled">
+    <btn :content="{}" @actionBtn="actionBtn">
       <template>
         <i class="fas fa-angle-left"></i>
       </template>
@@ -38,7 +38,7 @@ export default {
       this.$store.dispatch("getTimeVars");
       let time = this.$store.state.timeVars;
       if (time[0]) {
-        console.log(time, "hola")
+        console.log(time, "hola");
         return `${time[1]}s`;
       } else {
         return " ";
@@ -49,6 +49,7 @@ export default {
     actionBtn() {
       this.$store.dispatch("showModalDifficulty");
       this.$store.dispatch("showPlay");
+      this.$emit("clear");
     },
   },
 };
