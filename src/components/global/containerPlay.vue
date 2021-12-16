@@ -24,21 +24,6 @@ export default {
       totalMatch: 0,
     };
   },
-  created() {
-    let that = this;
-    let n = 0;
-    this.$store.dispatch("changeDisabled");
-    let x = setInterval(function () {
-      if (n == 5) {
-        for (let i = 0; i < that.$store.state.gameCards.length; i++) {
-          that.$store.dispatch("showCard", i);
-        }
-        clearInterval(x);
-        that.$store.dispatch("changeDisabled");
-      }
-      n++;
-    }, 1000);
-  },
   computed: {
     style() {
       let dif = this.columsF;
