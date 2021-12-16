@@ -52,7 +52,7 @@ export default new Vuex.Store({
         difficulty: "i",
         title: "Intermedio",
         time: true,
-        duration: 20,
+        duration: 15,
         addTime: 5,
         content: [
           {
@@ -176,6 +176,9 @@ export default new Vuex.Store({
     disabledCardInMatch({ commit }, pos) {
       commit("CHANGE_STATE_IN_CARD_WITCH_MATCH", pos);
     },
+    addTime({ commit }) {
+      commit("ADD_TIME");
+    },
   },
   mutations: {
     CHANGE_STATE_MODAL(state) {
@@ -237,7 +240,6 @@ export default new Vuex.Store({
       let pos = state.levels
         .find((i) => i.difficulty === state.difficulty)
         .content.findIndex((i) => i.state === false);
-      console.log(pos);
       if (pos >= 0) {
         state.numberOfPlays = state.levels.find(
           (i) => i.difficulty === state.difficulty
@@ -252,14 +254,14 @@ export default new Vuex.Store({
       state.gameCards[pos[1]].state = true;
     },
     GET_TIME_VARS(state) {
+      state.timeVars = [];
       let level = state.levels.find((i) => i.difficulty === state.difficulty);
       if (level.time) {
-        state.timeVars.push(
-          level.time,
-          level.duration,
-          level.addTime
-        );
+        state.timeVars.push(level.time, level.duration, level.addTime);
       }
+    },
+    ADD_TIME(state) {
+      state.timeVars[1] += state.timeVars[2];
     },
   },
 });
