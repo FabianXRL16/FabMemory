@@ -26,11 +26,18 @@ export default {
   },
   created() {
     let that = this;
-    setTimeout(() => {
-      for (let i = 0; i < that.$store.state.gameCards.length; i++) {
-        that.$store.dispatch("showCard", i);
+    let n = 0;
+    this.$store.dispatch("changeDisabled");
+    let x = setInterval(function () {
+      if (n == 5) {
+        for (let i = 0; i < that.$store.state.gameCards.length; i++) {
+          that.$store.dispatch("showCard", i);
+        }
+        clearInterval(x);
+        that.$store.dispatch("changeDisabled");
       }
-    }, 5000);
+      n++;
+    }, 1000);
   },
   computed: {
     style() {
@@ -175,8 +182,6 @@ export default {
         if (this.match()) {
           this.actionMatch();
           if (this.totalMatch === this.$store.state.gameCards.length / 2) {
-            console.log(this.$store.state.numberOfPlays);
-            console.log(this.totalMatch);
             if (this.totalMatch === this.$store.state.numberOfPlays / 2) {
               this.$store.dispatch("nextLevel", this.$store.state.difficulty);
             }
@@ -216,6 +221,7 @@ export default {
     actionMatch() {
       this.totalMatch += 1;
       this.$store.dispatch("disabledCardInMatch", this.pos);
+      this.$store.dispatch("addTime");
     },
     nextTry() {
       let that = this;
