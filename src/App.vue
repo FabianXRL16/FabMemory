@@ -48,4 +48,9 @@ body {
   place-content: center;
   position: relative;
 }
+@keyframes barsAnimation {
+  100% {
+    transform: scaleX(0);
+  }
+}
 </style>
