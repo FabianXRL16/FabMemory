@@ -3,8 +3,6 @@
     <timeoutBar :tick="tick" />
     <header-play />
     <container-play />
-    {{ duration }}
-    <button @click="duration += 5">+</button>
   </div>
 </template>
 
@@ -19,18 +17,18 @@ export default {
     return {
       title: "FabMemory",
       delay: "",
-      duration: 30,
       tick: 0,
       waitTime: 6,
     };
   },
   watch: {
     tick() {
-      if (this.duration > 0) {
-        this.duration -= 1;
-      }
       if (this.waitTime > 0) {
         this.waitTime -= 1;
+      } else {
+        if (this.$store.state.time > 0) {
+          this.$store.dispatch("runTime");
+        }
       }
     },
     waitTime(value) {
