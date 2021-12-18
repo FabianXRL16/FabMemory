@@ -129,7 +129,7 @@ export default new Vuex.Store({
     ],
     disabled: false,
     numberOfPlays: 4,
-    time: 10,
+    time: 0,
   },
   getters: {
     getModalDifficulty: (state) => state.modalDifficulty,
@@ -178,6 +178,9 @@ export default new Vuex.Store({
     },
     runTime({ commit }) {
       commit("RUN_TIME");
+    },
+    addTime({ commit }, increase) {
+      commit("ADD_TIME", increase);
     },
   },
   mutations: {
@@ -259,6 +262,9 @@ export default new Vuex.Store({
     },
     RUN_TIME(state) {
       state.time -= 1;
+    },
+    ADD_TIME(state, increase) {
+      state.time += increase;
     },
   },
 });
