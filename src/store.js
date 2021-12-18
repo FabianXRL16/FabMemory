@@ -130,6 +130,8 @@ export default new Vuex.Store({
     disabled: false,
     numberOfPlays: 4,
     time: 0,
+    modalMsg: false,
+    textMsg: true,
   },
   getters: {
     getModalDifficulty: (state) => state.modalDifficulty,
@@ -141,6 +143,8 @@ export default new Vuex.Store({
     getMaxMove: (state) => state.numberOfPlays,
     getDisabled: (state) => state.disabled,
     getTime: (state) => state.time,
+    getModalMsg: (state) => state.modalMsg,
+    getTextMsg: (state) => state.textMsg,
   },
   actions: {
     showModalDifficulty({ commit }) {
@@ -181,6 +185,9 @@ export default new Vuex.Store({
     },
     addTime({ commit }, increase) {
       commit("ADD_TIME", increase);
+    },
+    showWin({ commit }, result) {
+      commit("SHOW_WIN", result);
     },
   },
   mutations: {
@@ -265,6 +272,17 @@ export default new Vuex.Store({
     },
     ADD_TIME(state, increase) {
       state.time += increase;
+    },
+    SHOW_WIN(state, result) {
+      if (result) {
+        state.textMsg = true;
+      } else {
+        state.textMsg = false;
+      }
+      state.modalMsg = true;
+      setTimeout(() => {
+        state.modalMsg = false;
+      }, 2500);
     },
   },
 });
