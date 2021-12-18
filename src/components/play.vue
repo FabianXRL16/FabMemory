@@ -1,8 +1,10 @@
 <template>
   <div class="play">
-    <timeoutBar />
-    <header-play @clear="clearTime" />
+    <timeoutBar :tick="tick" />
+    <header-play />
     <container-play />
+    {{ duration }}
+    <button @click="duration += 5">+</button>
   </div>
 </template>
 
@@ -16,21 +18,33 @@ export default {
   data() {
     return {
       title: "FabMemory",
-      time: "",
+      delay: "",
+      duration: 30,
+      tick: 0,
+      waitTime: 6,
     };
   },
-  created() {
-    let that = this;
-    this.time = setTimeout(() => {
-      that.$store.state.gameCards.map((_, i) =>
-        that.$store.dispatch("showCard", i)
-      );
-    }, 5000);
-  },
-  methods: {
-    clearTime() {
-      clearInterval(this.time);
+  watch: {
+    tick() {
+      if (this.duration > 0) {
+        this.duration -= 1;
+      }
+      if (this.waitTime > 0) {
+        this.waitTime -= 1;
+      }
     },
+    waitTime(value) {
+      if (value === 0) {
+        this.$store.state.gameCards.map((_, i) =>
+          this.$store.dispatch("showCard", i)
+        );
+      }
+    },
+  },
+  mounted() {
+    setInterval(() => {
+      this.tick = Math.round(new Date().getTime() / 1000);
+    }, 1000);
   },
 };
 </script>
