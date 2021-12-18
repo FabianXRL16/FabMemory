@@ -201,7 +201,7 @@ export default {
         that.$store.dispatch("showCard", posAux[0]);
         that.$store.dispatch("showCard", posAux[1]);
         that.$store.dispatch("changeDisabled");
-      }, 500);
+      }, 300);
     },
     actionMatch() {
       this.totalMatch += 1;
@@ -209,10 +209,7 @@ export default {
       this.verifyAddTime();
     },
     nextTry() {
-      let that = this;
-      setTimeout(function () {
-        that.$store.dispatch("changeDisabled");
-      }, 500);
+      this.$store.dispatch("changeDisabled");
     },
     endGame() {
       let that = this;
