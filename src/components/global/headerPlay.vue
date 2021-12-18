@@ -41,7 +41,14 @@ export default {
       );
     },
     time() {
-      return this.$store.state.time;
+      if (
+        this.$store.state.difficulty === "i" ||
+        this.$store.state.difficulty === "d"
+      ) {
+        return this.$store.state.time;
+      } else {
+        return "";
+      }
     },
   },
   watch: {
