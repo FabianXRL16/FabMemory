@@ -29,9 +29,9 @@ export default {
     let that = this;
     this.time = setInterval(() => {
       if (that.duration === 5) {
+        clearInterval(that.time);
         that.$refs.barTime.style.transform = "scaleX(0)";
         that.$refs.barTime.style.transition = ".5s";
-        clearInterval(that.time);
       } else {
         that.duration++;
       }

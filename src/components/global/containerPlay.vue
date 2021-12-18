@@ -206,7 +206,6 @@ export default {
     actionMatch() {
       this.totalMatch += 1;
       this.$store.dispatch("disabledCardInMatch", this.pos);
-      this.$store.dispatch("addTime");
     },
     nextTry() {
       let that = this;

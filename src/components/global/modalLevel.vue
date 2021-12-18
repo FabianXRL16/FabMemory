@@ -61,7 +61,6 @@ export default {
       this.$store.dispatch("showModalDifficulty");
     },
     selectLevel(i) {
-      this.$store.dispatch("getTimeVars");
       this.$store.dispatch("showModalDifficulty");
       this.$store.dispatch("showPlay");
       this.$store.dispatch("showLevel", i);

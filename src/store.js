@@ -138,7 +138,6 @@ export default new Vuex.Store({
     getLevel: (state) => state.level,
     getGameCards: (state) => state.gameCards,
     getLevels: (state) => state.levels,
-    getTimeVars: (state) => state.timeVars,
     getMaxMove: (state) => state.numberOfPlays,
     getDisabled: (state) => state.disabled,
   },
@@ -170,14 +169,8 @@ export default new Vuex.Store({
     changeDisabled({ commit }) {
       commit("CHANGE_DISABLED");
     },
-    getTimeVars({ commit }) {
-      commit("GET_TIME_VARS");
-    },
     disabledCardInMatch({ commit }, pos) {
       commit("CHANGE_STATE_IN_CARD_WITCH_MATCH", pos);
-    },
-    addTime({ commit }) {
-      commit("ADD_TIME");
     },
   },
   mutations: {
@@ -252,16 +245,6 @@ export default new Vuex.Store({
     CHANGE_STATE_IN_CARD_WITCH_MATCH(state, pos) {
       state.gameCards[pos[0]].state = true;
       state.gameCards[pos[1]].state = true;
-    },
-    GET_TIME_VARS(state) {
-      state.timeVars = [];
-      let level = state.levels.find((i) => i.difficulty === state.difficulty);
-      if (level.time) {
-        state.timeVars.push(level.time, level.duration, level.addTime);
-      }
-    },
-    ADD_TIME(state) {
-      state.timeVars[1] += state.timeVars[2];
     },
   },
 });
