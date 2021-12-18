@@ -30,7 +30,7 @@ export default {
   --bg-secondary: #acbcd1;
   --bg-secondary-disabled: #c5d1e1;
   --bg-happy: #3ca4f3;
-  --bg-sad: #3ca4f3;
+  --bg-sad: #e00000;
   --white: #fcfafa;
   --black: #303030;
 }
