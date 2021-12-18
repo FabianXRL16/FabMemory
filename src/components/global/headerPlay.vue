@@ -10,7 +10,7 @@
       <h2>Nivel {{ $store.state.level }}</h2>
     </div>
     <div class="time">
-      <label v-if="timeText">{{ $store.state.time }}</label>
+      <label v-if="timeText">{{ time }}</label>
     </div>
   </div>
 </template>
@@ -39,6 +39,21 @@ export default {
         this.$store.state.difficulty === "i" ||
         this.$store.state.difficulty === "d"
       );
+    },
+    time() {
+      return this.$store.state.time;
+    },
+  },
+  watch: {
+    time() {
+      if (this.time === 0) {
+        this.$store.dispatch("showWin", false);
+        let that = this;
+        setTimeout(() => {
+          that.$store.dispatch("showModalDifficulty");
+          that.$store.dispatch("showPlay");
+        }, 2500);
+      }
     },
   },
   methods: {
