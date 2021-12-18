@@ -9,6 +9,12 @@
 <script>
 export default {
   name: "timeoutBar",
+  props: {
+    tick: {
+      type: Number,
+      default: 0,
+    },
+  },
   computed: {
     width() {
       return 20 * this.duration;
@@ -19,23 +25,22 @@ export default {
       };
     },
   },
+  watch: {
+    tick() {
+      if (this.duration <= 5) {
+        if (this.duration === 5) {
+          this.$refs.barTime.style.animation = "barsAnimation 1s forwards";
+        } else {
+          this.duration += 1;
+        }
+      }
+    },
+  },
   data() {
     return {
       time: "",
       duration: 0,
     };
-  },
-  created() {
-    let that = this;
-    this.time = setInterval(() => {
-      if (that.duration === 5) {
-        clearInterval(that.time);
-        that.$refs.barTime.style.transform = "scaleX(0)";
-        that.$refs.barTime.style.transition = ".5s";
-      } else {
-        that.duration++;
-      }
-    }, 1000);
   },
 };
 </script>
@@ -66,7 +71,7 @@ export default {
   background-color: var(--bg-secondary-disabled);
   z-index: 1;
   position: absolute;
-  transition: linear;
+  transition: width 0.5s;
 }
 @media (max-width: 750px) {
   .timeoutBar {
