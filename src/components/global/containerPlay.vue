@@ -206,6 +206,7 @@ export default {
     actionMatch() {
       this.totalMatch += 1;
       this.$store.dispatch("disabledCardInMatch", this.pos);
+      this.verifyAddTime();
     },
     nextTry() {
       let that = this;
@@ -220,6 +221,14 @@ export default {
         that.$store.dispatch("showPlay");
         that.$store.dispatch("changeDisabled");
       }, 500);
+    },
+    verifyAddTime() {
+      let levels = this.$store.state.levels;
+      let difficulty = this.$store.state.difficulty;
+      let snippetLevel = levels.find((i) => i.difficulty === difficulty);
+      if (snippetLevel.time) {
+        this.$store.dispatch("addTime", snippetLevel.addTime);
+      }
     },
   },
 };
