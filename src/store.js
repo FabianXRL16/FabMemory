@@ -127,9 +127,9 @@ export default new Vuex.Store({
         ],
       },
     ],
-    timeVars: [],
     disabled: false,
     numberOfPlays: 4,
+    time: 0,
   },
   getters: {
     getModalDifficulty: (state) => state.modalDifficulty,
@@ -140,6 +140,7 @@ export default new Vuex.Store({
     getLevels: (state) => state.levels,
     getMaxMove: (state) => state.numberOfPlays,
     getDisabled: (state) => state.disabled,
+    getTime: (state) => state.time,
   },
   actions: {
     showModalDifficulty({ commit }) {
@@ -172,6 +173,9 @@ export default new Vuex.Store({
     disabledCardInMatch({ commit }, pos) {
       commit("CHANGE_STATE_IN_CARD_WITCH_MATCH", pos);
     },
+    waitTime({commit}, difficulty){
+      commit("WAIT_TIME", difficulty)
+    }
   },
   mutations: {
     CHANGE_STATE_MODAL(state) {
@@ -246,5 +250,10 @@ export default new Vuex.Store({
       state.gameCards[pos[0]].state = true;
       state.gameCards[pos[1]].state = true;
     },
+    WAIT_TIME(state, difficulty){
+      let level = state.levels
+          .find((i) => i.difficulty === difficulty)
+      if(level.time) state.time = level.duration
+    }
   },
 });
