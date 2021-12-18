@@ -216,11 +216,12 @@ export default {
     },
     endGame() {
       let that = this;
+      this.$store.dispatch("showWin", true);
       setTimeout(() => {
         that.$store.dispatch("showModalDifficulty");
         that.$store.dispatch("showPlay");
         that.$store.dispatch("changeDisabled");
-      }, 500);
+      }, 2500);
     },
     verifyAddTime() {
       let levels = this.$store.state.levels;
