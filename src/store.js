@@ -10,42 +10,17 @@ export default new Vuex.Store({
     level: 1,
     play: false,
     gameCards: [],
-    levels: [
+    levels: JSON.parse(localStorage.getItem("bdLocal")) || [
       {
         difficulty: "f",
         title: "Fácil",
         time: false,
         content: [
-          {
-            title: "Nivel 1",
-            action: "1",
-            maxGame: 4,
-            state: true,
-          },
-          {
-            title: "Nivel 2",
-            action: "2",
-            maxGame: 6,
-            state: false,
-          },
-          {
-            title: "Nivel 3",
-            action: "3",
-            maxGame: 8,
-            state: false,
-          },
-          {
-            title: "Nivel 4",
-            action: "4",
-            maxGame: 10,
-            state: false,
-          },
-          {
-            title: "Nivel 5",
-            action: "5",
-            maxGame: 12,
-            state: false,
-          },
+          { title: "Nivel 1", action: "1", maxGame: 4, state: true },
+          { title: "Nivel 2", action: "2", maxGame: 6, state: false },
+          { title: "Nivel 3", action: "3", maxGame: 8, state: false },
+          { title: "Nivel 4", action: "4", maxGame: 10, state: false },
+          { title: "Nivel 5", action: "5", maxGame: 12, state: false },
         ],
       },
       {
@@ -55,36 +30,11 @@ export default new Vuex.Store({
         duration: 15,
         addTime: 5,
         content: [
-          {
-            title: "Nivel 1",
-            action: "1",
-            maxGame: 8,
-            state: true,
-          },
-          {
-            title: "Nivel 2",
-            action: "2",
-            maxGame: 12,
-            state: false,
-          },
-          {
-            title: "Nivel 3",
-            action: "3",
-            maxGame: 16,
-            state: false,
-          },
-          {
-            title: "Nivel 4",
-            action: "4",
-            maxGame: 20,
-            state: false,
-          },
-          {
-            title: "Nivel 5",
-            action: "5",
-            maxGame: 24,
-            state: false,
-          },
+          { title: "Nivel 1", action: "1", maxGame: 8, state: true },
+          { title: "Nivel 2", action: "2", maxGame: 12, state: false },
+          { title: "Nivel 3", action: "3", maxGame: 16, state: false },
+          { title: "Nivel 4", action: "4", maxGame: 20, state: false },
+          { title: "Nivel 5", action: "5", maxGame: 24, state: false },
         ],
       },
       {
@@ -94,36 +44,11 @@ export default new Vuex.Store({
         duration: 10,
         addTime: 3,
         content: [
-          {
-            title: "Nivel 1",
-            action: "1",
-            maxGame: 16,
-            state: true,
-          },
-          {
-            title: "Nivel 2",
-            action: "2",
-            maxGame: 20,
-            state: false,
-          },
-          {
-            title: "Nivel 3",
-            action: "3",
-            maxGame: 24,
-            state: false,
-          },
-          {
-            title: "Nivel 4",
-            action: "4",
-            maxGame: 28,
-            state: false,
-          },
-          {
-            title: "Nivel 5",
-            action: "5",
-            maxGame: 32,
-            state: false,
-          },
+          { title: "Nivel 1", action: "1", maxGame: 16, state: true },
+          { title: "Nivel 2", action: "2", maxGame: 20, state: false },
+          { title: "Nivel 3", action: "3", maxGame: 24, state: false },
+          { title: "Nivel 4", action: "4", maxGame: 28, state: false },
+          { title: "Nivel 5", action: "5", maxGame: 32, state: false },
         ],
       },
     ],
@@ -188,6 +113,9 @@ export default new Vuex.Store({
     },
     showWin({ commit }, result) {
       commit("SHOW_WIN", result);
+    },
+    sendLocalStorage({ commit }) {
+      commit("SEND_LOCALSTORAGE");
     },
   },
   mutations: {
@@ -283,6 +211,16 @@ export default new Vuex.Store({
       setTimeout(() => {
         state.modalMsg = false;
       }, 2500);
+    },
+    SEND_LOCALSTORAGE(state) {
+      localStorage.setItem("bdLocal", JSON.stringify(state.levels));
+    },
+    INITIALISE_STORE(state) {
+      if (localStorage.getItem("bdLocal")) {
+        this.replaceState(
+          Object.assign(state, JSON.parse(localStorage.getItem("bdLocal")))
+        );
+      }
     },
   },
 });
