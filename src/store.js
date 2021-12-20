@@ -15,12 +15,43 @@ export default new Vuex.Store({
         difficulty: "f",
         title: "Fácil",
         time: false,
+        completedCount: 0,
         content: [
-          { title: "Nivel 1", action: "1", maxGame: 4, state: true },
-          { title: "Nivel 2", action: "2", maxGame: 6, state: false },
-          { title: "Nivel 3", action: "3", maxGame: 8, state: false },
-          { title: "Nivel 4", action: "4", maxGame: 10, state: false },
-          { title: "Nivel 5", action: "5", maxGame: 12, state: false },
+          {
+            title: "Nivel 1",
+            action: "1",
+            maxGame: 4,
+            state: true,
+            completed: false,
+          },
+          {
+            title: "Nivel 2",
+            action: "2",
+            maxGame: 6,
+            state: false,
+            completed: false,
+          },
+          {
+            title: "Nivel 3",
+            action: "3",
+            maxGame: 8,
+            state: false,
+            completed: false,
+          },
+          {
+            title: "Nivel 4",
+            action: "4",
+            maxGame: 10,
+            state: false,
+            completed: false,
+          },
+          {
+            title: "Nivel 5",
+            action: "5",
+            maxGame: 12,
+            state: false,
+            completed: false,
+          },
         ],
       },
       {
@@ -29,12 +60,43 @@ export default new Vuex.Store({
         time: true,
         duration: 15,
         addTime: 5,
+        completedCount: 0,
         content: [
-          { title: "Nivel 1", action: "1", maxGame: 8, state: true },
-          { title: "Nivel 2", action: "2", maxGame: 12, state: false },
-          { title: "Nivel 3", action: "3", maxGame: 16, state: false },
-          { title: "Nivel 4", action: "4", maxGame: 20, state: false },
-          { title: "Nivel 5", action: "5", maxGame: 24, state: false },
+          {
+            title: "Nivel 1",
+            action: "1",
+            maxGame: 8,
+            state: true,
+            completed: false,
+          },
+          {
+            title: "Nivel 2",
+            action: "2",
+            maxGame: 12,
+            state: false,
+            completed: false,
+          },
+          {
+            title: "Nivel 3",
+            action: "3",
+            maxGame: 16,
+            state: false,
+            completed: false,
+          },
+          {
+            title: "Nivel 4",
+            action: "4",
+            maxGame: 20,
+            state: false,
+            completed: false,
+          },
+          {
+            title: "Nivel 5",
+            action: "5",
+            maxGame: 24,
+            state: false,
+            completed: false,
+          },
         ],
       },
       {
@@ -43,12 +105,43 @@ export default new Vuex.Store({
         time: true,
         duration: 10,
         addTime: 3,
+        completedCount: 0,
         content: [
-          { title: "Nivel 1", action: "1", maxGame: 16, state: true },
-          { title: "Nivel 2", action: "2", maxGame: 20, state: false },
-          { title: "Nivel 3", action: "3", maxGame: 24, state: false },
-          { title: "Nivel 4", action: "4", maxGame: 28, state: false },
-          { title: "Nivel 5", action: "5", maxGame: 32, state: false },
+          {
+            title: "Nivel 1",
+            action: "1",
+            maxGame: 16,
+            state: true,
+            completed: false,
+          },
+          {
+            title: "Nivel 2",
+            action: "2",
+            maxGame: 20,
+            state: false,
+            completed: false,
+          },
+          {
+            title: "Nivel 3",
+            action: "3",
+            maxGame: 24,
+            state: false,
+            completed: false,
+          },
+          {
+            title: "Nivel 4",
+            action: "4",
+            maxGame: 28,
+            state: false,
+            completed: false,
+          },
+          {
+            title: "Nivel 5",
+            action: "5",
+            maxGame: 32,
+            state: false,
+            completed: false,
+          },
         ],
       },
     ],
@@ -116,6 +209,9 @@ export default new Vuex.Store({
     },
     sendLocalStorage({ commit }) {
       commit("SEND_LOCALSTORAGE");
+    },
+    levelCompleted({ commit }) {
+      commit("LEVEL_COMPLETED");
     },
   },
   mutations: {
@@ -221,6 +317,12 @@ export default new Vuex.Store({
           Object.assign(state, JSON.parse(localStorage.getItem("bdLocal")))
         );
       }
+    },
+    LEVEL_COMPLETED(state) {
+      let arr = state.levels.find(
+        (i) => i.difficulty === state.difficulty
+      ).content;
+      arr[state.level - 1].completed = true;
     },
   },
 });
