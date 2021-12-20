@@ -213,6 +213,7 @@ export default {
     },
     endGame() {
       let that = this;
+      this.$store.dispatch("sendLocalStorage");
       setTimeout(() => {
         that.$store.dispatch("showWin", true);
         setTimeout(() => {
