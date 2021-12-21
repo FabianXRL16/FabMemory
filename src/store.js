@@ -319,10 +319,19 @@ export default new Vuex.Store({
       }
     },
     LEVEL_COMPLETED(state) {
-      let arr = state.levels.find(
-        (i) => i.difficulty === state.difficulty
-      ).content;
-      arr[state.level - 1].completed = true;
+      let arr = state.levels.find((i) => i.difficulty === state.difficulty);
+      arr.content[state.level - 1].completed = true;
+      if (arr.completedCount <= 3) {
+        if (state.level === 5 && arr.content[state.level - 1].completed) {
+          arr.completedCount += 1;
+          arr.content.map((_, i) => {
+            if (i === 0) arr.content[i].state = true;
+            else arr.content[i].state = false;
+            arr.content[i].completed = false;
+          });
+        }
+      }
+      localStorage.setItem("bdLocal", JSON.stringify(state.levels));
     },
   },
 });
