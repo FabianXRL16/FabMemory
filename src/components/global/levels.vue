@@ -2,12 +2,14 @@
   <div class="levels">
     <div class="containerLevel">
       <btn
-        v-for="(level, i) of levels"
+        v-for="(level, i) of $store.state.levels"
         :key="i"
         :content="level"
         :styleBtn="style"
+        :star="true"
         @actionBtn="actionBtn"
-      />
+      >
+      </btn>
     </div>
   </div>
 </template>
@@ -19,11 +21,6 @@ export default {
   components: { btn },
   data() {
     return {
-      levels: [
-        { title: "Fácil", action: "f" },
-        { title: "Intermedio", action: "i" },
-        { title: "Difícil", action: "d" },
-      ],
       style: `min-width: 200px; height: 100px;`,
     };
   },
