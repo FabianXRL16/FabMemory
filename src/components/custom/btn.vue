@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     action() {
-      this.$emit("actionBtn", this.content.action);
+      this.$emit("actionBtn", this.content.difficulty);
     },
   },
 };
@@ -44,6 +44,10 @@ export default {
   transition: ease-in;
   min-width: 50px;
   min-height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .btn:hover {
   box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
