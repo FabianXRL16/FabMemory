@@ -167,6 +167,7 @@ export default {
         if (this.match()) {
           this.actionMatch();
           if (this.totalMatch === this.$store.state.gameCards.length / 2) {
+            this.$store.dispatch("levelCompleted")
             if (this.totalMatch === this.$store.state.numberOfPlays / 2) {
               this.$store.dispatch("nextLevel", this.$store.state.difficulty);
             }
