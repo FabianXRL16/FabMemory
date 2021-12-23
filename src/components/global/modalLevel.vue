@@ -81,7 +81,7 @@ export default {
   bottom: 0;
   margin: auto;
   width: 650px;
-  height: 400px;
+  height: 500px;
   background: var(--bg-primary);
   border-radius: 10px;
   box-shadow: rgba(204, 219, 232) 8px 8px 20px,
@@ -143,9 +143,9 @@ h1 {
 }
 @media (max-width: 750px) {
   .modalLevel {
-    width: 90vw;
-    height: 90vh;
-    padding: 20px;
+    width: 100vw;
+    height: 100vh;
+    padding: 40px;
     box-shadow: none;
   }
   .containerLevels {
