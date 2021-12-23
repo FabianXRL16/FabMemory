@@ -18,6 +18,7 @@
         :content="level"
         :i="i"
         :styleBtn="styleLevels"
+        :levelsComponent="true"
       />
     </div>
     <div class="actions">
