@@ -15,7 +15,7 @@ export default new Vuex.Store({
         difficulty: "f",
         title: "Fácil",
         time: false,
-        completedCount: 0,
+        completedCount: 4,
         content: [
           {
             title: "Nivel 1",
@@ -321,15 +321,16 @@ export default new Vuex.Store({
     LEVEL_COMPLETED(state) {
       let arr = state.levels.find((i) => i.difficulty === state.difficulty);
       arr.content[state.level - 1].completed = true;
-      if (arr.completedCount < 6) {
-        if (state.level === 5 && arr.content[state.level - 1].completed) {
-          arr.completedCount += 1;
+      if (state.level === 5) {
+        arr.completedCount += 1;
+        if (arr.completedCount < 6) {
           arr.content.map((_, i) => {
             if (i === 0) arr.content[i].state = true;
             else arr.content[i].state = false;
             arr.content[i].completed = false;
           });
         }
+      } else {
         localStorage.setItem("bdLocal", JSON.stringify(state.levels));
       }
     },
