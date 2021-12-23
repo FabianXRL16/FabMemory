@@ -15,7 +15,7 @@ export default new Vuex.Store({
         difficulty: "f",
         title: "Fácil",
         time: false,
-        completedCount: 4,
+        completedCount: 0,
         content: [
           {
             title: "Nivel 1",
