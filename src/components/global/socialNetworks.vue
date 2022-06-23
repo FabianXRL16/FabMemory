@@ -34,7 +34,7 @@ export default {
         },
         {
           icon: "fab fa-twitter",
-          href: "https://twitter.com/_fxrl16",
+          href: "https://twitter.com/FabianXRL16",
           color: "#00aced",
         },
       ],
